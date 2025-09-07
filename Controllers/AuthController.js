@@ -21,7 +21,8 @@ const forgotPassword = async (req, res) => {
     user.resetTokenExpiry = Date.now() + 3600000; // 1 hour
     await user.save();
     const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:5173";
-    const resetLink = `https://localhost:5173/reset-password/${token}`;
+    const resetLink = `${FRONTEND_URL}/reset-password/${token}`;   // <-- use FRONTEND_URL
+
 
     // TODO: integrate nodemailer here
      const transporter = nodemailer.createTransport({
