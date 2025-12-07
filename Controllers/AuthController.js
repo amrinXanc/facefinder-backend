@@ -20,8 +20,9 @@ const forgotPassword = async (req, res) => {
     user.resetToken = resetToken;
     user.resetTokenExpiry = Date.now() + 3600000; // 1 hour
     await user.save();
+    const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:5173";
+    const resetLink = `${FRONTEND_URL.replace(/\/$/, "")}/reset-password/${resetToken}`;
 
-    const resetLink = `${process.env.CLIENT_URL}/reset-password/${resetToken}`;
 
     const msg = {
       to: user.email,
