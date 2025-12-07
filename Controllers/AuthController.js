@@ -2,8 +2,9 @@ const bcrypt = require("bcrypt");
 const UserModel = require("../Models/User");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
-
+const sgMail = require('@sendgrid/mail');
 const crypto = require("crypto");
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 // ----------------- FORGOT PASSWORD -----------------
 const forgotPassword = async (req, res) => {
